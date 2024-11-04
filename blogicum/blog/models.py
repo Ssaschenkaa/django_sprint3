@@ -55,15 +55,6 @@ class Post(BaseModel):
         related_query_name='post_category'
     )
 
-    def get_posts(**filters):
-        filters_dict = {
-            'is_published': True,
-            'pub_date__lte': timezone.now(),
-            'category__is_published': True
-        }
-        filters_dict.update(filters)
-        return Post.objects.filter(**filters_dict)
-
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
@@ -72,8 +63,7 @@ class Post(BaseModel):
     def __str__(self):
         if len(self.title) > TITLE_PREVIEW_LENGTH:
             return self.title[:TITLE_PREVIEW_LENGTH] + '...'
-        else:
-            return self.title
+        return self.title
 
 
 class Category(BaseModel):
@@ -98,8 +88,7 @@ class Category(BaseModel):
     def __str__(self):
         if len(self.title) > TITLE_PREVIEW_LENGTH:
             return self.title[:TITLE_PREVIEW_LENGTH] + '...'
-        else:
-            return self.title
+        return self.title
 
 
 class Location(BaseModel):
@@ -115,5 +104,4 @@ class Location(BaseModel):
     def __str__(self):
         if len(self.name) > TITLE_PREVIEW_LENGTH:
             return self.name[:TITLE_PREVIEW_LENGTH] + '...'
-        else:
-            return self.name
+        return self.name
